@@ -1,0 +1,24 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: weather-service  # micro service unique ID
+  profiles:
+    active: dev
+  cloud:
+    config:
+      uri: http://localhost:8888
+      name: database-weather-dev
+  kafka:
+    bootstrap-servers: "localhost:9092"
+    consumer:
+      group-id: "GroupId"
+
+
+eureka:
+  client:
+    register-with-eureka: true # register to eureka server
+    fetch-registry: true # Getting instances' information from eureka server
+    service-url:
+      defaultZone : http://127.0.0.1:8761/eureka #Eureka Server's address

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/Eureka" />
+        <option name="gradleJvm" value="18" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/Eureka" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/apiGateway-service" />
+        <option name="gradleJvm" value="18" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/apiGateway-service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/config-service" />
+        <option name="gradleJvm" value="18" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/config-service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/noti-service" />
+        <option name="gradleJvm" value="18" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/noti-service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/user-service" />
+        <option name="gradleJvm" value="18" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/user-service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/weather-service" />
+        <option name="gradleJvm" value="18" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/weather-service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>
