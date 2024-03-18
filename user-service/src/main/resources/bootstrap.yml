@@ -9,7 +9,7 @@ spring:
   cloud:
     config:
       uri: http://localhost:8888
-      name: database-user-dev
+      name: database-user
   kafka:
     bootstrap-servers: "localhost:9092"
     consumer:
@@ -22,3 +22,9 @@ eureka:
     fetch-registry: true # Getting instances' information from eureka server
     service-url:
       defaultZone : http://127.0.0.1:8761/eureka #Eureka Server's address
+
+management: # Actuator
+  endpoints:
+    web:
+      exposure:
+        include: busrefresh

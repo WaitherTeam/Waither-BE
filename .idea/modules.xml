@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Waither-BE.iml" filepath="$PROJECT_DIR$/.idea/Waither-BE.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/noti-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/noti-service.main.iml" />
     </modules>
   </component>
 </project>
