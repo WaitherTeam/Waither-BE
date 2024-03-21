@@ -16,17 +16,11 @@ public class UserMedian {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // '매우 추움'~'추움' 의 평균값
-    private Integer veryColdMedian;
-
-    // '추움'~'보통' 의 평균값
-    private Integer coldNormalMedian;
-
-    // '보통'~'더움' 의 평균값
-    private Integer normalHotMedian;
-
-    // '더움'~'매우 더움' 의 평균값
-    private Integer veryHotMedian;
+    // 각 답변의 평균 값 사이 중간값 (level 1 쪽이 추움 ~ level 5 쪽이 더움)
+    private Double medianOf1And2;
+    private Double medianOf2And3;
+    private Double medianOf3And4;
+    private Double medianOf4And5;
 
     // 계절
     @Enumerated(EnumType.STRING)

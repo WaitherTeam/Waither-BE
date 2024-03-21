@@ -23,46 +23,47 @@ public class Settings {
     private LocalDateTime outTime;
 
     // 외출 알림
-    private Boolean outAlert;
+    private boolean outAlert;
 
     // 월 ~ 금 알림
-    private Boolean sun;
-    private Boolean mon;
-    private Boolean tue;
-    private Boolean wed;
-    private Boolean thu;
-    private Boolean fri;
-    private Boolean sat;
+    private boolean sun;
+    private boolean mon;
+    private boolean tue;
+    private boolean wed;
+    private boolean thu;
+    private boolean fri;
+    private boolean sat;
 
     // 기상 특보 알림
-    private Boolean climateAlert;
+    private boolean climateAlert;
 
     // 사용자 맞춤 알림
-    private Boolean userAlert;
+    private boolean userAlert;
 
     // 강설 정보 알림
-    private Boolean snowAlert;
+    private boolean snowAlert;
 
     // 바람 세기 알림
-    private Boolean windAlert;
+    private boolean windAlert;
 
     // 바람세기 정도
     private Integer windDegree;
 
     // 직장 지역 레포트 알림 받기
-    private Boolean regionReport;
+    private boolean regionReport;
 
     // 강수량 보기
-    private Boolean precipitation;
+    private boolean precipitation;
 
     // 풍량/풍속 보기
-    private Boolean wind;
+    private boolean wind;
 
     // 미세먼지 보기
-    private Boolean dust;
+    private boolean dust;
 
     @OneToOne
     @JoinColumn(name = "user_id")
     private User user;
+
 
 }

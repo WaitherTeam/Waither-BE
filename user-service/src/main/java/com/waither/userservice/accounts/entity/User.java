@@ -36,7 +36,7 @@ public class User {
     private String image;
 
     // 사용자 맞춤 서비스 허용 여부
-    private Boolean custom;
+    private boolean custom;
 
     @Override
     public String toString() {

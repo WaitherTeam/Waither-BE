@@ -16,20 +16,13 @@ public class UserData {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // '매우 추움' 답변의 평균값
-    private Double veryCold;
+    // 각 답변의 평균 값 (level 1 쪽이 추움 ~ level 5 쪽이 더움)
+    private Double level1;
+    private Double level2;
+    private Double level3;
+    private Double level4;
+    private Double level5;
 
-    // '추움' 답변의 평균값
-    private Double cold;
-
-    // '좋음/보통' 답변의 평균값
-    private Double normal;
-
-    // '더움' 답변의 평균값
-    private Double hot;
-
-    // '매우 더움' 답변의 평균값
-    private Double veryHot;
 
     // 계절
     @Enumerated(EnumType.STRING)
