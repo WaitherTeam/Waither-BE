@@ -1,5 +1,6 @@
 package com.waither.userservice.accounts.entity;
 
+import com.waither.userservice.accounts.entity.type.UserStatus;
 import com.waither.userservice.survey.entity.Survey;
 import jakarta.persistence.*;
 import lombok.*;
@@ -28,16 +29,14 @@ public class User {
     private String password;
 
     // 유저 상태 (active / 휴면 / 탈퇴 등)
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private UserStatus status;
 
     // 프로필 이미지
     private String image;
 
     // 사용자 맞춤 서비스 허용 여부
     private Boolean custom;
-
-    @OneToMany(mappedBy = "survey")
-    private List<Survey> survey;
 
     @Override
     public String toString() {

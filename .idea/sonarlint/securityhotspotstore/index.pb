@@ -31,3 +31,7 @@ Luser-service/src/main/java/com/waither/userservice/survey/entity/Survey.java,0
 Nuser-service/src/main/java/com/waither/userservice/setting/entity/Setting.java,b/f/bf3133c9bf298c1a93e58c60ef3a39b46472c7d7
 
 Ouser-service/src/main/java/com/waither/userservice/setting/entity/Settings.java,4/2/42b4e398e04865922ab8aa89892de5ed07b4a891
+Å
+Quser-service/src/main/java/com/waither/userservice/survey/entity/type/Season.java,5/5/555f66c12bc4106724426880c8e2a45500a83ff0
+á
+Wuser-service/src/main/java/com/waither/userservice/accounts/entity/type/UserStatus.java,1/3/13ad08403e27faf9a85a63753b5beb66fc5a94ba
