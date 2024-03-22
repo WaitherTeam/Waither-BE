@@ -54,7 +54,10 @@ public class RedisUtil {
 	}
 
 	public boolean delete(String key) {
-		return Boolean.TRUE.equals(redisTemplate.delete(key));
+		return redisTemplate.delete(key + ":expectedTemp") &&
+			redisTemplate.delete(key + ":expectedRain") &&
+			redisTemplate.delete(key + ":expectedPty") &&
+			redisTemplate.delete(key + ":expectedSky");
 	}
 }
 

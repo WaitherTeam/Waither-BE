@@ -1,0 +1,13 @@
+
+p
+java:S1192"NDefine a constant instead of duplicating this literal ":expectedTemp" 3 times.(†íç¼úÿÿÿÿ8™¯´æ1
+j
+java:S1192!"MDefine a constant instead of duplicating this literal ":expectedPty" 3 times.(ªÖßó8‚™¯´æ1
+p
+java:S1192"NDefine a constant instead of duplicating this literal ":expectedRain" 3 times.(ÆúÑøÿÿÿÿ8‚™¯´æ1
+o
+java:S1192#"MDefine a constant instead of duplicating this literal ":expectedSky" 3 times.(ÚßŞøÿÿÿÿ8‚™¯´æ1
+a
+java:S2259<"DA "NullPointerException" could be thrown; "delete" is nullable here.(Á¢Á8¸™¯´æ1
+f
+java:S2259;"DA "NullPointerException" could be thrown; "delete" is nullable here.(Õ‡áşÿÿÿÿ8¸™¯´æ1
