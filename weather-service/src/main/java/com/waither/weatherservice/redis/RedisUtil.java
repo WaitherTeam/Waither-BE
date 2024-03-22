@@ -18,6 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class RedisUtil {
 
+	private static final String EXPECTED_TEMP_SUFFIX = ":expectedTemp";
+	private static final String EXPECTED_RAIN_SUFFIX = ":expectedRain";
+	private static final String EXPECTED_PTY_SUFFIX = ":expectedPty";
+	private static final String EXPECTED_SKY_SUFFIX = ":expectedSky";
 	private final RedisTemplate<String, String> redisTemplate;
 
 	private String convertListToString(List<String> list) {
@@ -26,13 +30,13 @@ public class RedisUtil {
 
 	public void saveAsExpectedWeather(String key, ExpectedWeather val, Long timeout, TimeUnit timeUnit) {
 		redisTemplate.opsForValue()
-			.set(key + ":expectedTemp", convertListToString(val.getExpectedTemp()), timeout, timeUnit);
+			.set(key + EXPECTED_TEMP_SUFFIX, convertListToString(val.getExpectedTemp()), timeout, timeUnit);
 		redisTemplate.opsForValue()
-			.set(key + ":expectedRain", convertListToString(val.getExpectedRain()), timeout, timeUnit);
+			.set(key + EXPECTED_RAIN_SUFFIX, convertListToString(val.getExpectedRain()), timeout, timeUnit);
 		redisTemplate.opsForValue()
-			.set(key + ":expectedPty", convertListToString(val.getExpectedPty()), timeout, timeUnit);
+			.set(key + EXPECTED_PTY_SUFFIX, convertListToString(val.getExpectedPty()), timeout, timeUnit);
 		redisTemplate.opsForValue()
-			.set(key + ":expectedSky", convertListToString(val.getExpectedSky()), timeout, timeUnit);
+			.set(key + EXPECTED_SKY_SUFFIX, convertListToString(val.getExpectedSky()), timeout, timeUnit);
 	}
 
 	public boolean hasKey(String key) {
@@ -40,10 +44,10 @@ public class RedisUtil {
 	}
 
 	public ExpectedWeather getExpectedWeather(String key) {
-		String expectedTemp = Optional.ofNullable(redisTemplate.opsForValue().get(key + ":expectedTemp")).orElse("");
-		String expectedRain = Optional.ofNullable(redisTemplate.opsForValue().get(key + ":expectedRain")).orElse("");
-		String expectedPty = Optional.ofNullable(redisTemplate.opsForValue().get(key + ":expectedPty")).orElse("");
-		String expectedSky = Optional.ofNullable(redisTemplate.opsForValue().get(key + ":expectedSky")).orElse("");
+		String expectedTemp = Optional.ofNullable(redisTemplate.opsForValue().get(key + EXPECTED_TEMP_SUFFIX)).orElse("");
+		String expectedRain = Optional.ofNullable(redisTemplate.opsForValue().get(key + EXPECTED_RAIN_SUFFIX)).orElse("");
+		String expectedPty = Optional.ofNullable(redisTemplate.opsForValue().get(key + EXPECTED_PTY_SUFFIX)).orElse("");
+		String expectedSky = Optional.ofNullable(redisTemplate.opsForValue().get(key + EXPECTED_SKY_SUFFIX)).orElse("");
 
 		return ExpectedWeather.builder()
 			.expectedTemp(Arrays.asList(expectedTemp.split(",")))
@@ -54,10 +58,10 @@ public class RedisUtil {
 	}
 
 	public boolean delete(String key) {
-		return redisTemplate.delete(key + ":expectedTemp") &&
-			redisTemplate.delete(key + ":expectedRain") &&
-			redisTemplate.delete(key + ":expectedPty") &&
-			redisTemplate.delete(key + ":expectedSky");
+		return redisTemplate.delete(key + EXPECTED_TEMP_SUFFIX) &&
+			redisTemplate.delete(key + EXPECTED_RAIN_SUFFIX) &&
+			redisTemplate.delete(key + EXPECTED_PTY_SUFFIX) &&
+			redisTemplate.delete(key + EXPECTED_SKY_SUFFIX);
 	}
 }
 
