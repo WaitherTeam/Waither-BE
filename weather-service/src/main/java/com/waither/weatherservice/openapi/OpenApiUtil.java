@@ -27,10 +27,10 @@ public class OpenApiUtil {
 		int ny,
 		String baseDate,
 		String baseTime,
+		int numOfRows,
 		String apiUrl
 	) throws URISyntaxException {
 
-		int numOfRows = 60;
 		int pageNo = 1;
 		String dataType = "JSON";
 
@@ -61,12 +61,20 @@ public class OpenApiUtil {
 		}
 	}
 
-	public List<String> apiResponseFilter(List<ApiResponse.Item> items, String category) {
+	public List<String> apiResponseListFilter(List<ApiResponse.Item> items, String category) {
 		return items.stream()
 			.filter(item -> item.getCategory().equals(category))
 			.sorted(Comparator.comparing(item -> item.getFcstDate() + item.getFcstTime()))
 			.map(ApiResponse.Item::getFcstValue)
 			.toList();
+	}
+
+	public String apiResponseStringFilter(List<ApiResponse.Item> items, String category) {
+		return items.stream()
+			.filter(item -> item.getCategory().equals(category))
+			.sorted(Comparator.comparing(item -> item.getFcstDate() + item.getFcstTime()))
+			.map(ApiResponse.Item::getFcstValue)
+			.findFirst().orElse(null);
 	}
 
 }

@@ -49,3 +49,5 @@ Mweather-service/src/main/java/com/waither/weatherservice/redis/RedisUtil.java,
 Qweather-service/src/main/java/com/waither/weatherservice/openapi/OpenApiUtil.java,3/b/3b00b16d393c38abcebb5824e1e7b06d2744c629
 „
 Tweather-service/src/main/java/com/waither/weatherservice/service/WeatherService.java,b/4/b489a57e7e4b6a7a6cafad4a5f7516ccc689e0df
+Ž
+^weather-service/src/main/java/com/waither/weatherservice/controller/WeatherTestController.java,8/8/8887ebcabe27c0e022903e9412bb0ea27838f6a2

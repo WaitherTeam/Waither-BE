@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.waither.weatherservice.entity.DailyWeather;
 import com.waither.weatherservice.entity.ExpectedWeather;
 import com.waither.weatherservice.openapi.ApiResponse;
 import com.waither.weatherservice.openapi.OpenApiUtil;
@@ -32,16 +33,16 @@ public class WeatherService {
 		String baseTime
 	) throws URISyntaxException {
 
-		List<ApiResponse.Item> items = openApiUtil.callForeCastApi(nx, ny, baseDate, baseTime,
+		List<ApiResponse.Item> items = openApiUtil.callForeCastApi(nx, ny, baseDate, baseTime, 60,
 			"http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst");
 
-		List<String> expectedTempList = openApiUtil.apiResponseFilter(items, "T1H");
+		List<String> expectedTempList = openApiUtil.apiResponseListFilter(items, "T1H");
 
-		List<String> expectedRainList = openApiUtil.apiResponseFilter(items, "RN1");
+		List<String> expectedRainList = openApiUtil.apiResponseListFilter(items, "RN1");
 
-		List<String> expectedPtyList = openApiUtil.apiResponseFilter(items, "PTY");
+		List<String> expectedPtyList = openApiUtil.apiResponseListFilter(items, "PTY");
 
-		List<String> expectedSkyList = openApiUtil.apiResponseFilter(items, "SKY");
+		List<String> expectedSkyList = openApiUtil.apiResponseListFilter(items, "SKY");
 
 		ApiResponse.Item item = items.get(0);
 		String key = item.getNx() + "_" + item.getNy() + "_" + item.getFcstDate() + "_" + item.getFcstTime();
@@ -60,8 +61,36 @@ public class WeatherService {
 	public void createDailyWeather(int nx,
 		int ny,
 		String baseDate,
-		String baseTime) {
+		String baseTime) throws URISyntaxException {
 
-		return;
+		// Base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
+		List<ApiResponse.Item> items = openApiUtil.callForeCastApi(nx, ny, baseDate, baseTime, 300,
+			"http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst");
+
+		String pop = openApiUtil.apiResponseStringFilter(items, "POP");
+		String tmn = openApiUtil.apiResponseStringFilter(items, "TMN");
+		String tmx = openApiUtil.apiResponseStringFilter(items, "TMX");
+		String reh = openApiUtil.apiResponseStringFilter(items, "REH");
+		String vec = openApiUtil.apiResponseStringFilter(items, "VEC");
+		String wsd = openApiUtil.apiResponseStringFilter(items, "WSD");
+
+		log.info(pop);
+		log.info(tmn);
+		log.info(tmx);
+		log.info(reh);
+		log.info(vec);
+		log.info(wsd);
+
+		DailyWeather dailyWeather = DailyWeather.builder()
+			.pop(pop)
+			.tempMin(tmn)
+			.tempMax(tmx)
+			.humidity(reh)
+			.windVector(vec)
+			.windDegree(wsd)
+			.build();
+
+		log.info("{} : ", dailyWeather);
+
 	}
 }

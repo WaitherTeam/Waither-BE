@@ -23,4 +23,9 @@ public class WeatherTestController {
 	public void createExpectedWeatherTest(@RequestBody WeatherTestRequest request) throws URISyntaxException {
 		weatherService.createExpectedWeather(request.nx(), request.ny(), request.baseDate(), request.baseTime());
 	}
+
+	@PostMapping("/daily")
+	public void createDailyWeatherTest(@RequestBody WeatherTestRequest request) throws URISyntaxException {
+		weatherService.createDailyWeather(request.nx(), request.ny(), request.baseDate(), request.baseTime());
+	}
 }
