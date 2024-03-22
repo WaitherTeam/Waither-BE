@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 public class DailyWeather {
-	
-	private String region;
-	private double tempCur;
-	private double tempMin;
-	private double tempMax;
-	private double humidity;
-	private int humidityPer;
-	private int windVector;
-	private double windDegree;
+
+	// 강수확률 (%)
+	private String pop;
+	private String tempMin;
+	private String tempMax;
+	private String humidity;
+	private String humidityPer;
+	private String windVector;
+	private String windDegree;
 }

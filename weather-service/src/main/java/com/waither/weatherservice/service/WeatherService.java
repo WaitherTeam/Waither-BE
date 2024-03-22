@@ -43,7 +43,9 @@ public class WeatherService {
 
 		List<String> expectedSkyList = openApiUtil.apiResponseFilter(items, "SKY");
 
-		String key = nx + "_" + ny + "_" + baseDate + "_" + baseTime;
+		ApiResponse.Item item = items.get(0);
+		String key = item.getNx() + "_" + item.getNy() + "_" + item.getFcstDate() + "_" + item.getFcstTime();
+
 		ExpectedWeather expectedWeather = ExpectedWeather.builder()
 			.expectedTemp(expectedTempList)
 			.expectedRain(expectedRainList)
