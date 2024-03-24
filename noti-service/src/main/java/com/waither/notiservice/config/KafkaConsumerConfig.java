@@ -26,22 +26,22 @@ public class KafkaConsumerConfig {
     private String bootstrapAddress;
 
     @Value(value = "notice_1")
-    String groupId;
+    private String groupId;
 
     @Value(value = "earliest")
-    String autoOffsetResetStrategy;
+    private String autoOffsetResetStrategy;
 
     @Value(value = "false")
-    String enableAutoCommit;
+    private String enableAutoCommit;
 
     @Value(value = "5000")
-    String autoCommitIntervalMs;
+    private String autoCommitIntervalMs;
 
     @Value(value = "30000")
-    String sessionTimeoutMs;
+    private String sessionTimeoutMs;
 
     @Value(value = "100")
-    String maxPollRecords;
+    private String maxPollRecords;
 
     @Bean
     public ConsumerFactory<String, String> consumerFactory() {
