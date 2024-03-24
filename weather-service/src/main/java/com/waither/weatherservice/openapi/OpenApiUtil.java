@@ -22,7 +22,7 @@ public class OpenApiUtil {
 	// TODO 위도, 경도 -> x, y 좌표 변환 메서드 추가
 
 	// 기상청 Api (초단기, 단기)
-	public List<ApiResponse.Item> callForeCastApi(
+	public List<OpenApiResponse.Item> callForeCastApi(
 		int nx,
 		int ny,
 		String baseDate,
@@ -48,10 +48,10 @@ public class OpenApiUtil {
 
 		log.info("[*] uri : {}", uri);
 
-		ApiResponse.Response response = webClient.get()
+		OpenApiResponse.Response response = webClient.get()
 			.uri(uri)
 			.accept(MediaType.APPLICATION_JSON)
-			.retrieve().bodyToMono(ApiResponse.class)
+			.retrieve().bodyToMono(OpenApiResponse.class)
 			.block().getResponse();
 
 		if (response.getHeader().getResultCode().equals("00")) {
@@ -61,19 +61,19 @@ public class OpenApiUtil {
 		}
 	}
 
-	public List<String> apiResponseListFilter(List<ApiResponse.Item> items, String category) {
+	public List<String> apiResponseListFilter(List<OpenApiResponse.Item> items, String category) {
 		return items.stream()
 			.filter(item -> item.getCategory().equals(category))
 			.sorted(Comparator.comparing(item -> item.getFcstDate() + item.getFcstTime()))
-			.map(ApiResponse.Item::getFcstValue)
+			.map(OpenApiResponse.Item::getFcstValue)
 			.toList();
 	}
 
-	public String apiResponseStringFilter(List<ApiResponse.Item> items, String category) {
+	public String apiResponseStringFilter(List<OpenApiResponse.Item> items, String category) {
 		return items.stream()
 			.filter(item -> item.getCategory().equals(category))
 			.sorted(Comparator.comparing(item -> item.getFcstDate() + item.getFcstTime()))
-			.map(ApiResponse.Item::getFcstValue)
+			.map(OpenApiResponse.Item::getFcstValue)
 			.findFirst().orElse(null);
 	}
 

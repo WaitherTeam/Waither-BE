@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.waither.weatherservice.entity.DailyWeather;
 import com.waither.weatherservice.entity.ExpectedWeather;
-import com.waither.weatherservice.openapi.ApiResponse;
+import com.waither.weatherservice.openapi.OpenApiResponse;
 import com.waither.weatherservice.openapi.OpenApiUtil;
 import com.waither.weatherservice.redis.RedisUtil;
 
@@ -33,7 +33,7 @@ public class WeatherService {
 		String baseTime
 	) throws URISyntaxException {
 
-		List<ApiResponse.Item> items = openApiUtil.callForeCastApi(nx, ny, baseDate, baseTime, 60,
+		List<OpenApiResponse.Item> items = openApiUtil.callForeCastApi(nx, ny, baseDate, baseTime, 60,
 			"http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst");
 
 		List<String> expectedTempList = openApiUtil.apiResponseListFilter(items, "T1H");
@@ -44,7 +44,7 @@ public class WeatherService {
 
 		List<String> expectedSkyList = openApiUtil.apiResponseListFilter(items, "SKY");
 
-		ApiResponse.Item item = items.get(0);
+		OpenApiResponse.Item item = items.get(0);
 		String key = item.getNx() + "_" + item.getNy() + "_" + item.getFcstDate() + "_" + item.getFcstTime();
 
 		ExpectedWeather expectedWeather = ExpectedWeather.builder()
@@ -57,14 +57,13 @@ public class WeatherService {
 		log.info("ExpectedWeather : {}", redisUtil.getExpectedWeather(key));
 	}
 
-	// TODO
 	public void createDailyWeather(int nx,
 		int ny,
 		String baseDate,
 		String baseTime) throws URISyntaxException {
 
 		// Base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
-		List<ApiResponse.Item> items = openApiUtil.callForeCastApi(nx, ny, baseDate, baseTime, 300,
+		List<OpenApiResponse.Item> items = openApiUtil.callForeCastApi(nx, ny, baseDate, baseTime, 300,
 			"http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst");
 
 		String pop = openApiUtil.apiResponseStringFilter(items, "POP");

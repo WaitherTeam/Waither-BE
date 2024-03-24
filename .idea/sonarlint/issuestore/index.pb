@@ -51,3 +51,9 @@ Qweather-service/src/main/java/com/waither/weatherservice/openapi/OpenApiUtil.ja
 Tweather-service/src/main/java/com/waither/weatherservice/service/WeatherService.java,b/4/b489a57e7e4b6a7a6cafad4a5f7516ccc689e0df
 é
 ^weather-service/src/main/java/com/waither/weatherservice/controller/WeatherTestController.java,8/8/8887ebcabe27c0e022903e9412bb0ea27838f6a2
+Å
+Qweather-service/src/main/java/com/waither/weatherservice/openapi/ApiResponse.java,7/0/70b89afa04f9d9c80965e9ee79dabbaa2f823f14
+Ü
+Vweather-service/src/main/java/com/waither/weatherservice/openapi/OpenApiException.java,a/3/a3a95758bd64e61ed4aea555ebb3fe37033dba35
+Ö
+Uweather-service/src/main/java/com/waither/weatherservice/openapi/OpenApiResponse.java,8/4/8471897cd5f2b34c38c9bbedcb2c880218e4fb22
