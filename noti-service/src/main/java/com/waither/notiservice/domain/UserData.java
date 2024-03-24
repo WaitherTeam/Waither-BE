@@ -1,9 +1,7 @@
 package com.waither.notiservice.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.waither.notiservice.domain.type.Season;
+import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -18,7 +16,8 @@ import org.hibernate.annotations.DynamicInsert;
 public class UserData {
 
     @Id
-    private Long userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     // 각 답변의 평균 값 (level 1 쪽이 추움 ~ level 5 쪽이 더움)
     @ColumnDefault(value = "34")
@@ -35,6 +34,12 @@ public class UserData {
 
     @ColumnDefault(value = "7")
     private Double level5;
+
+    private Long userId;
+
+    @Enumerated(value = EnumType.STRING)
+    private Season season;
+
 
     public void setLevel(int level, Double value) {
         switch (level) {
