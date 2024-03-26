@@ -1,10 +1,8 @@
 package com.waither.notiservice.config;
 
-import com.waither.notiservice.dto.UserDataDto;
+import com.waither.notiservice.dto.AlarmGoOutDto;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
-import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
-import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -71,9 +69,9 @@ public class KafkaConsumerConfig {
     }
 
 
-    @Bean("userDataKafkaListenerContainerFactory")
-    public ConcurrentKafkaListenerContainerFactory<String, UserDataDto> userDataKafkaListenerContainerFactory(){
-        ConcurrentKafkaListenerContainerFactory<String, UserDataDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    @Bean("alarmGoOutKafkaListenerContainerFactory")
+    public ConcurrentKafkaListenerContainerFactory<String, AlarmGoOutDto> alarmGoOutDtoConcurrentKafkaListenerContainerFactory(){
+        ConcurrentKafkaListenerContainerFactory<String, AlarmGoOutDto> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(userConsumerFactory());
         factory.setConcurrency(3);
         factory.setBatchListener(true);
@@ -81,7 +79,7 @@ public class KafkaConsumerConfig {
         return factory;
     }
 
-    private ConsumerFactory<String, UserDataDto> userConsumerFactory() {
+    private ConsumerFactory<String, AlarmGoOutDto> userConsumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
         props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
@@ -91,7 +89,7 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, maxPollRecords);
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, autoOffsetResetStrategy);
 
-         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(UserDataDto.class));
+         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(AlarmGoOutDto.class));
     }
 
 }

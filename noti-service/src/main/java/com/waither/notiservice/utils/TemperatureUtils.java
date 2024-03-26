@@ -2,6 +2,7 @@ package com.waither.notiservice.utils;
 
 import com.waither.notiservice.domain.UserData;
 import com.waither.notiservice.domain.type.Season;
+import com.waither.notiservice.dto.UserMedian;
 import com.waither.notiservice.enums.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -20,14 +21,12 @@ public class TemperatureUtils {
     public static Expressions[] springAndAutumnExpressions = {HOT, LITTLE_HOT, GOOD, LITTLE_COLD, COLD};
     public static Expressions[] summerExpressions = {COOL, GOOD, LITTLE_HOT, HOT, VERY_HOT};
 
-    public static String createUserDataMessage(UserData userData, double temperature) {
-        //TODO : (Refactor필요) Median값을 user에서도 계산하는데 여기서도 계산?
-        double medianBetween1And2 = (userData.getLevel1() + userData.getLevel2()) / 2;
-        double medianBetween2And3 = (userData.getLevel2() + userData.getLevel3()) / 2;
-        double medianBetween3And4 = (userData.getLevel3() + userData.getLevel4()) / 2;
-        double medianBetween4And5 = (userData.getLevel4() + userData.getLevel5()) / 2;
+    public static String createUserDataMessage(UserMedian userMedian, double temperature) {
+        double medianBetween1And2 = userMedian.getMedianOf1And2();
+        double medianBetween2And3 = userMedian.getMedianOf2And3();
+        double medianBetween3And4 = userMedian.getMedianOf3And4();
+        double medianBetween4And5 = userMedian.getMedianOf4And5();
 
-        //TODO : 계절별 멘트 정리
         if (temperature < medianBetween1And2) {
             return getExpression(getCurrentSeason(), 1);
         } else if (medianBetween1And2 <= temperature && temperature < medianBetween2And3) {

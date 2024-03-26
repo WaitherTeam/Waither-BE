@@ -1,7 +1,7 @@
 package com.waither.notiservice.service;
 
 import com.waither.notiservice.domain.UserData;
-import com.waither.notiservice.dto.UserDataDto;
+import com.waither.notiservice.dto.AlarmGoOutDto;
 import com.waither.notiservice.repository.UserDataRepository;
 import com.waither.notiservice.utils.TemperatureUtils;
 import lombok.RequiredArgsConstructor;
@@ -23,48 +23,27 @@ public class KafkaConsumerService {
     private final UserDataRepository userDataRepository;
 
     /**
-     * 사용자 데이터 동기화 Listener
-     * */
-    @KafkaListener(topics = "user-data", containerFactory = "userDataKafkaListenerContainerFactory")
-    public void consumeUserData(UserDataDto userDataDto) {
-      log.info("[ Kafka Listener ] User Data 동기화");
-      log.info("[ Kafka Listener ] User ID : --> {}", userDataDto.getUserId());
-      log.info("[ Kafka Listener ] LEVEL : --> {}", userDataDto.getLevel());
-      log.info("[ Kafka Listener ] TEMP : --> {}", userDataDto.getTemperature());
-
-        Optional<UserData> userData = userDataRepository.findById(userDataDto.userId);
-        if (userData.isPresent()) {
-            userData.get().setLevel(userDataDto.getLevel(), userDataDto.getTemperature());
-        } else {
-            userDataRepository.save(userDataDto.toEntity());
-        }
-    }
-
-    /**
      * 외출 알림 Listener
      * */
-    @KafkaListener(topics = "alarm-go-out")
-    public void consumeGoOutAlarm(@Payload String message) {
-        StringTokenizer st = new StringTokenizer(message, ", ");
+    @KafkaListener(topics = "alarm-go-out", containerFactory = "alarmGoOutKafkaListenerContainerFactory")
+    public void consumeGoOutAlarm(AlarmGoOutDto alarmGoOutDto) {
         String resultMessage = "";
-        Long userId = Long.valueOf(st.nextToken());
-        boolean isUserAlert = Boolean.parseBoolean(st.nextToken());
+        String token = alarmGoOutDto.getToken();
+        boolean isUserAlert = alarmGoOutDto.isUserAlert();
+        String nickname = alarmGoOutDto.getUserName();
 
 
         log.info("[ Kafka Listener ] 사용자 아침 알림");
-        log.info("[ Kafka Listener ] User ID : --> {}", userId);
+        log.info("[ Kafka Listener ] User token : --> {}", token);
         log.info("[ Kafka Listener ] userAlert : --> {}", isUserAlert);
 
         //TODO : 하루 날씨 정보 가져오기
         double avgTemp = 2.5;
 
-        //TODO : 사용자 닉네임 가져오기
-        resultMessage += "진호님, 오늘 날씨는 ";
+        resultMessage += nickname + "님, ";
 
-        UserData userData = userDataRepository.findById(userId)
-                //TODO : Custom Exception
-                .orElseThrow(RuntimeException::new);
-        resultMessage += TemperatureUtils.createUserDataMessage(userData, avgTemp);
+
+        resultMessage += TemperatureUtils.createUserDataMessage(alarmGoOutDto.getUserMedian(), avgTemp);
 
         //TODO : 날씨 요약
         resultMessage += "오후 6시에 비가 올 예정이예요. 우산을 챙겨가세요.";

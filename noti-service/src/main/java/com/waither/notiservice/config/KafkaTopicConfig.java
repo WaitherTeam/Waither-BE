@@ -45,8 +45,7 @@ public class KafkaTopicConfig {
      * <h2>외출 시간 알림 토픽</h2>
      * @Producer : user-service
      * @Consumer : noti-service
-     * @MessageFormat : "{사용자 ID}, {사용자 맞춤 예보 on/off 여부}"
-     * @example : "23, true"
+     * @MessageFormat : {@link com.waither.notiservice.dto.AlarmGoOutDto}
      * @Description : 외출 시간 푸시 알림을 생성하기 위한 토픽입니다. 알림을 보낼 시간이 되면 메세지를 발행합니다.
      */
     @Bean
