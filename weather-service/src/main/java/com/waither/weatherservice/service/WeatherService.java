@@ -33,15 +33,13 @@ public class WeatherService {
 		String baseTime
 	) throws URISyntaxException {
 
+		// 1시간마다 업데이트 (1일 24회)
 		List<OpenApiResponse.Item> items = openApiUtil.callForeCastApi(nx, ny, baseDate, baseTime, 60,
 			"http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst");
 
 		List<String> expectedTempList = openApiUtil.apiResponseListFilter(items, "T1H");
-
 		List<String> expectedRainList = openApiUtil.apiResponseListFilter(items, "RN1");
-
 		List<String> expectedPtyList = openApiUtil.apiResponseListFilter(items, "PTY");
-
 		List<String> expectedSkyList = openApiUtil.apiResponseListFilter(items, "SKY");
 
 		OpenApiResponse.Item item = items.get(0);
@@ -68,7 +66,7 @@ public class WeatherService {
 		String baseDate,
 		String baseTime) throws URISyntaxException {
 
-		// Base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 (1일 8회)
+		// Base_time : 0200, 0500, 0800, 1100, 1400, 1700, 2000, 2300 업데이트 (1일 8회)
 		List<OpenApiResponse.Item> items = openApiUtil.callForeCastApi(nx, ny, baseDate, baseTime, 350,
 			"http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getVilageFcst");
 
@@ -88,7 +86,6 @@ public class WeatherService {
 		redisUtil.saveAsValue(key + "reh", reh, 8L, TimeUnit.HOURS);
 		redisUtil.saveAsValue(key + "vec", vec, 8L, TimeUnit.HOURS);
 		redisUtil.saveAsValue(key + "wsd", wsd, 8L, TimeUnit.HOURS);
-
 
 		// TODO 조회 테스트 후 삭제 예정
 		DailyWeather dailyWeather = DailyWeather.builder()
