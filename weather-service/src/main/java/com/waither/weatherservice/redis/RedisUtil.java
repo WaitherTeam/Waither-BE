@@ -8,8 +8,6 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
-import com.waither.weatherservice.entity.ExpectedWeather;
-
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,37 +22,31 @@ public class RedisUtil {
 		return String.join(",", list);
 	}
 
-	public void saveAsExpectedWeather(String key, ExpectedWeather val, Long timeout, TimeUnit timeUnit) {
+	public void saveAsValue(String key, String val, Long timeout, TimeUnit timeUnit) {
 		redisTemplate.opsForValue()
-			.set(key + ":expectedTemp", convertListToString(val.getExpectedTemp()), timeout, timeUnit);
+			.set(key, val, timeout, timeUnit);
+	}
+
+	public void saveAsList(String key, List<String> list, Long timeout, TimeUnit timeUnit) {
 		redisTemplate.opsForValue()
-			.set(key + ":expectedRain", convertListToString(val.getExpectedRain()), timeout, timeUnit);
-		redisTemplate.opsForValue()
-			.set(key + ":expectedPty", convertListToString(val.getExpectedPty()), timeout, timeUnit);
-		redisTemplate.opsForValue()
-			.set(key + ":expectedSky", convertListToString(val.getExpectedSky()), timeout, timeUnit);
+			.set(key, convertListToString(list), timeout, timeUnit);
 	}
 
 	public boolean hasKey(String key) {
 		return Boolean.TRUE.equals(redisTemplate.hasKey(key));
 	}
 
-	public ExpectedWeather getExpectedWeather(String key) {
-		String expectedTemp = Optional.ofNullable(redisTemplate.opsForValue().get(key + ":expectedTemp")).orElse("");
-		String expectedRain = Optional.ofNullable(redisTemplate.opsForValue().get(key + ":expectedRain")).orElse("");
-		String expectedPty = Optional.ofNullable(redisTemplate.opsForValue().get(key + ":expectedPty")).orElse("");
-		String expectedSky = Optional.ofNullable(redisTemplate.opsForValue().get(key + ":expectedSky")).orElse("");
+	public String getAsValue(String key) {
+		return Optional.ofNullable(redisTemplate.opsForValue().get(key)).orElse("");
+	}
 
-		return ExpectedWeather.builder()
-			.expectedTemp(Arrays.asList(expectedTemp.split(",")))
-			.expectedRain(Arrays.asList(expectedRain.split(",")))
-			.expectedPty(Arrays.asList(expectedPty.split(",")))
-			.expectedSky(Arrays.asList(expectedSky.split(",")))
-			.build();
+	public List<String> getAsList(String key) {
+		String temp = Optional.ofNullable(redisTemplate.opsForValue().get(key)).orElse("");
+		return Arrays.asList(temp.split(","));
 	}
 
 	public boolean delete(String key) {
-		return Boolean.TRUE.equals(redisTemplate.delete(key));
+		return redisTemplate.delete(key);
 	}
 }
 

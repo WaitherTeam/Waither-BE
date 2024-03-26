@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ApiResponse {
+public class OpenApiResponse {
 	private Response response;
 
 	@Getter
