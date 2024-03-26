@@ -52,7 +52,7 @@ public class OpenApiUtil {
 			.uri(uri)
 			.accept(MediaType.APPLICATION_JSON)
 			.retrieve().bodyToMono(OpenApiResponse.class)
-			.blockOptional().orElseThrow(() -> new OpenApiException("[*] Response is null")).getResponse();
+			.blockOptional().orElseThrow(() -> new OpenApiException("Response is null")).getResponse();
 
 		if (response.getHeader().getResultCode().equals("00")) {
 			return response.getBody().getItems().getItem();
