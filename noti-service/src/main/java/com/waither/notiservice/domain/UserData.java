@@ -17,37 +17,27 @@ public class UserData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    // 각 답변의 평균 값 (level 1 쪽이 추움 ~ level 5 쪽이 더움)
-    @ColumnDefault(value = "34")
-    private Double level1;
-
-    @ColumnDefault(value = "28")
-    private Double level2;
-
-    @ColumnDefault(value = "24")
-    private Double level3;
-
-    @ColumnDefault(value = "10")
-    private Double level4;
-
-    @ColumnDefault(value = "7")
-    private Double level5;
-
     private Long userId;
 
-    @Enumerated(value = EnumType.STRING)
-    private Season season;
+    private String nickName;
+
+    // 기상 특보 알림
+    private boolean climateAlert;
+
+    // 사용자 맞춤 알림
+    private boolean userAlert;
+
+    // 강설 정보 알림
+    private boolean snowAlert;
+
+    // 바람 세기 알림
+    private boolean windAlert;
+
+    // 바람세기 정도
+    private Integer windDegree;
+
+    // 직장 지역 레포트 알림 받기
+    private boolean regionReport;
 
 
-    public void setLevel(int level, Double value) {
-        switch (level) {
-            case 1 -> level1 = value;
-            case 2 -> level2 = value;
-            case 3 -> level3 = value;
-            case 4 -> level4 = value;
-            case 5 -> level5 = value;
-        }
-    }
 }
