@@ -1,15 +1,12 @@
 package com.waither.notiservice.utils;
 
-import com.waither.notiservice.domain.UserData;
+import com.waither.notiservice.domain.UserMedian;
 import com.waither.notiservice.domain.type.Season;
-import com.waither.notiservice.dto.UserMedian;
 import com.waither.notiservice.enums.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.Date;
 
 import static com.waither.notiservice.enums.Expressions.*;
 

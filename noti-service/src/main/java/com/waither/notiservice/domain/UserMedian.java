@@ -25,4 +25,12 @@ public class UserMedian {
     @Enumerated(value = EnumType.STRING)
     public Season season;
 
+    public void setLevel(int level, double value) {
+        switch (level) {
+            case 1 -> medianOf1And2 = value;
+            case 2 -> medianOf2And3 = value;
+            case 3 -> medianOf3And4 = value;
+            case 4 -> medianOf4And5 = value;
+        }
+    }
 }
