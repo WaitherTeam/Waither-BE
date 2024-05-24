@@ -16,8 +16,8 @@ services:
   api-gateway:
     container_name: api-gateway
     image: ${DOCKERHUB_USERNAME}/waither-gateway
-    expose:
-      - "8000"
+    ports:
+      - "8000:8000"
 #    restart: always
     restart: no
     volumes:
@@ -26,8 +26,8 @@ services:
   config:
     container_name: config
     image: ${DOCKERHUB_USERNAME}/waither-config
-    expose:
-      - "8888"
+    ports:
+      - "8888:8888"
     environment:
       CONFIG_GIT_URI : ${CONFIG_GIT_URI}
       CONFIG_PASSPHRASE : ${CONFIG_PASSPHRASE}
@@ -40,8 +40,8 @@ services:
   eureka:
     container_name: eureka
     image: ${DOCKERHUB_USERNAME}/waither-eureka
-    expose:
-      - "8761"
+    ports:
+      - "8761:8761"
 #    restart: always
     restart: no
     volumes:
@@ -50,8 +50,8 @@ services:
   user-service:
     container_name: user-service
     image: ${DOCKERHUB_USERNAME}/waither-user
-    expose:
-      - "8080"
+    ports:
+      - "8080:8080"
 #    restart: unless-stopped #수동으로 중지되지 않는 이상 항상 재실행
     restart: no
     volumes:
@@ -60,8 +60,8 @@ services:
   weather-service:
     container_name: weather-service
     image: ${DOCKERHUB_USERNAME}/waither-weather
-    expose:
-      - "8081"
+    ports:
+      - "8081:8081"
 #    restart: unless-stopped
     restart: no
     volumes:
@@ -70,8 +70,8 @@ services:
   noti-service:
     container_name: noti-service
     image: ${DOCKERHUB_USERNAME}/waither-noti
-    expose:
-      - "8082"
+    ports:
+      - "8082:8082"
 #    restart: unless-stopped
     restart: no
     volumes:
