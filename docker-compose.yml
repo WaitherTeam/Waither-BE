@@ -23,14 +23,15 @@ services:
     volumes:
       - /home/ec2-user/logs/api-gateway:/logs
 
+
   config:
     container_name: config
     image: ${DOCKERHUB_USERNAME}/waither-config
     ports:
       - "8888:8888"
-    environment:
-      CONFIG_GIT_URI : ${CONFIG_GIT_URI}
-      CONFIG_PASSPHRASE : ${CONFIG_PASSPHRASE}
+#    environment:
+#      CONFIG_GIT_URI : ${CONFIG_GIT_URI}
+#      CONFIG_PASSPHRASE : ${CONFIG_PASSPHRASE}
 #      CONFIG_PRIVATE_KEY_DIR : ${CONFIG_PRIVATE_KEY_DIR}
 #    restart: always
     restart: no
