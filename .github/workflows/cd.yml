@@ -105,8 +105,8 @@ jobs:
           cd noti-service
           cat src/main/resources/bootstrap.yml
           ./gradlew clean build -x test 
-          docker build --no-cache -t ${{ secrets.DOCKERHUB_USERNAME }}/waither-noti-test .
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/waither-noti-test
+          docker build --no-cache -t ${{ secrets.DOCKERHUB_USERNAME }}/waither-noti .
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/waither-noti
           cd ..
 
       #User-Service Build & Docker Push
