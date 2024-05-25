@@ -26,8 +26,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          ref: prod
 
       #Setting JDK
       - name: Set up JDK 17
@@ -105,6 +103,7 @@ jobs:
       - name: Build with Gradle - noti-service
         run: |
           cd noti-service
+          cat /src/main/resources/bootstrap.yml
           ./gradlew clean build -x test 
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/waither-noti .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/waither-noti
