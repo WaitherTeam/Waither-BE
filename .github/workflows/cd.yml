@@ -50,6 +50,7 @@ jobs:
           cd ./config-service/src/main/resources
           touch ./bootstrap.yml
           echo "${{ secrets.CONFIG_APPLICATION_YML }}" > ./bootstrap.yml
+          cat bootstrap.yml
 
       # DockerHub Login
       - name: Docker Hub Login
