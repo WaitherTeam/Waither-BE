@@ -104,7 +104,7 @@ jobs:
         run: |
           cd noti-service
           ./gradlew clean build -x test 
-          docker build --no-cache -t ${{ secrets.DOCKERHUB_USERNAME }}/waither-noti .
+          docker build --no-cache -t ${{ secrets.DOCKERHUB_USERNAME }}/waither-noti-test .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/waither-noti
           cd ..
 
