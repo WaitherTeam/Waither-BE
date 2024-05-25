@@ -103,6 +103,7 @@ jobs:
       - name: Build with Gradle - noti-service
         run: |
           cd noti-service
+          cat src/main/resources/bootstrap.yml
           ./gradlew clean build -x test 
           docker build --no-cache -t ${{ secrets.DOCKERHUB_USERNAME }}/waither-noti-test .
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/waither-noti
