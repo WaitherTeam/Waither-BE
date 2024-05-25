@@ -64,6 +64,7 @@ jobs:
       #Config-Service Build & Docker Push
       - name: Build with Gradle - config
         run: |
+          docker builder prune 
           cd config-service
           ./gradlew clean build -x test
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/waither-config .
