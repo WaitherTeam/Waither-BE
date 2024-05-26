@@ -8,10 +8,10 @@ spring:
     active: dev
   cloud:
     config:
-      uri: http://config:8888
+      uri: http://localhostß:8888
       name: database-apiGateway, redis, jwt
   kafka:
-    bootstrap-servers: "http://kafka:9092"
+    bootstrap-servers: "http://localhost:9092"
     consumer:
       group-id: "GroupId"
 
@@ -20,7 +20,7 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://eureka:8761/eureka
+      defaultZone: http://localhost:8761/eureka
 
 #management: # Actuator Settings
 #  endpoints:
