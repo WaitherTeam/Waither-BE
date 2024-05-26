@@ -32,7 +32,7 @@ services:
     environment:
       CONFIG_GIT_URI : ${CONFIG_GIT_URI}
       CONFIG_PASSPHRASE : ${CONFIG_PASSPHRASE}
-      CONFIG_PRIVATE_KEY_PATH : ${CONFIG_PRIVATE_KEY_PATH}
+      CONFIG_PRIVATE_KEY : ${CONFIG_PRIVATE_KEY}
 #    restart: always
     restart: no
     volumes:

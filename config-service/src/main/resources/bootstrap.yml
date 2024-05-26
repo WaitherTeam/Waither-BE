@@ -13,4 +13,4 @@ spring:
           uri: ${CONFIG_GIT_URI}
           ignore-local-ssh-settings: true
           passphrase: ${CONFIG_PASSPHRASE}
-          private-key-path: ${CONFIG_PRIVATE_KEY_PATH}
+          private-key: ${CONFIG_PRIVATE_KEY}
