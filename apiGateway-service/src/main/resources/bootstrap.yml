@@ -8,7 +8,7 @@ spring:
     active: dev
   cloud:
     config:
-      uri: http://localhostß:8888
+      uri: http://localhost:8888
       name: database-apiGateway, redis, jwt
   kafka:
     bootstrap-servers: "http://localhost:9092"

@@ -146,14 +146,17 @@ jobs:
             export CONFIG_PASSPHRASE=${{ secrets.CONFIG_PASSPHRASE }}
             export DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
 
+            cd /home
+            
+            docker-compose pull
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/waither-config
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/waither-gateway
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/waither-noti
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/waither-user
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/waither-weather
             
-            bash /home/docker_init.sh
-            bash /home/common.sh
-            bash /home/deploy.sh
+            bash ./docker_init.sh
+            bash ./common.sh
+            bash ./deploy.sh
             
             docker image prune -f
