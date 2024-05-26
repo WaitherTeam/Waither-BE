@@ -145,6 +145,7 @@ jobs:
             export CONFIG_GIT_URI=${{ secrets.CONFIG_GIT_URI }}
             export CONFIG_PASSPHRASE=${{ secrets.CONFIG_PASSPHRASE }}
             export DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
+            export CONFIG_PRIVATE_KEY_PATH = ${{ secrets.CONFIG_PRIVATE_KEY_PATH}}
 
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/waither-config
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/waither-gateway
