@@ -1,8 +1,8 @@
 FROM openjdk:17-jdk
 
 ARG JAR_FILE=build/libs/*.jar
-ARG PINPOINT_JAR_FILE=../pinpoint/pinpoint-agent-2.2.2/pinpoint-bootstrap-2.2.2.jar
-ARG PINPOINT_CONFIG=../pinpoint/pinpoint-agent-2.2.2/pinpoint-root.config
+ARG PINPOINT_JAR_FILE=pinpoint/pinpoint-bootstrap-2.2.2.jar
+ARG PINPOINT_CONFIG=pinpoint/pinpoint-root.config
 
 COPY ${JAR_FILE} app.jar
 COPY ${PINPOINT_JAR_FILE} pinpoint.jar
