@@ -12,6 +12,7 @@ import com.waither.userservice.kafka.KafkaService;
 import com.waither.userservice.repository.SurveyRepository;
 import com.waither.userservice.repository.UserDataRepository;
 import com.waither.userservice.repository.UserMedianRepository;
+import com.waither.userservice.util.RestClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.parameters.P;
@@ -34,9 +35,11 @@ public class SurveyService {
 
     private final KafkaService kafkaService;
 
+    private final RestClient restClient;
+
     @Transactional
     public void createSurvey(User user, SurveyReqDto.SurveyRequestDto surveyRequestDto) {
-        Double temp = getTemp(surveyRequestDto.time());
+        Double temp = getTemp(surveyRequestDto.latitude(), surveyRequestDto.longitude(), surveyRequestDto.time());
         Survey survey = SurveyConverter.toSurvey(surveyRequestDto, temp, getCurrentSeason());
         survey.setUser(user);
         user.addSurvey(survey);
@@ -74,9 +77,8 @@ public class SurveyService {
         userMedianRepository.save(userMedian);
     }
 
-    // Todo: 해당 시각의 체감 온도 받아오기 (Weather-Service로 부터)
-    public Double getTemp(LocalDateTime time) {
-        return 18.0;
+    public Double getTemp(double latitude, double longitude, LocalDateTime time) {
+        return restClient.getTemperature(latitude, longitude, time);
     }
 
     public static Season getCurrentSeason() {

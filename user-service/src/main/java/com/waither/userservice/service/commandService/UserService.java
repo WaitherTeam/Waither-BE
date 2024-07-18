@@ -4,13 +4,12 @@ import com.waither.userservice.converter.*;
 import com.waither.userservice.dto.request.UserReqDto;
 import com.waither.userservice.dto.response.KakaoResDto;
 import com.waither.userservice.entity.*;
-import com.waither.userservice.entity.enums.Season;
 import com.waither.userservice.global.exception.CustomException;
 import com.waither.userservice.global.jwt.dto.JwtDto;
 import com.waither.userservice.global.jwt.userdetails.PrincipalDetails;
 import com.waither.userservice.global.jwt.util.JwtUtil;
 import com.waither.userservice.global.response.ErrorCode;
-import com.waither.userservice.global.util.RedisUtil;
+import com.waither.userservice.util.RedisUtil;
 import com.waither.userservice.kafka.KafkaConverter;
 import com.waither.userservice.kafka.KafkaDto;
 import com.waither.userservice.kafka.KafkaService;
@@ -26,10 +25,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-
-import static com.waither.userservice.service.commandService.SurveyService.getCurrentSeason;
 
 @Slf4j
 @RequiredArgsConstructor

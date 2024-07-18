@@ -4,7 +4,7 @@ import com.waither.userservice.global.jwt.dto.JwtDto;
 import com.waither.userservice.global.jwt.execption.SecurityCustomException;
 import com.waither.userservice.global.jwt.execption.SecurityErrorCode;
 import com.waither.userservice.global.jwt.userdetails.PrincipalDetails;
-import com.waither.userservice.global.util.RedisUtil;
+import com.waither.userservice.util.RedisUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
