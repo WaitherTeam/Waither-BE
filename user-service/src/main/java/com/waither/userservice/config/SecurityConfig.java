@@ -3,7 +3,7 @@ package com.waither.userservice.config;
 
 import com.waither.userservice.global.jwt.filter.*;
 import com.waither.userservice.global.jwt.util.JwtUtil;
-import com.waither.userservice.global.util.RedisUtil;
+import com.waither.userservice.util.RedisUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

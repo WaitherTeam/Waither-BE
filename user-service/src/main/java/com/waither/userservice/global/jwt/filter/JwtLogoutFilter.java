@@ -3,7 +3,7 @@ package com.waither.userservice.global.jwt.filter;
 import com.waither.userservice.global.jwt.execption.SecurityErrorCode;
 import com.waither.userservice.global.jwt.execption.SecurityCustomException;
 import com.waither.userservice.global.jwt.util.JwtUtil;
-import com.waither.userservice.global.util.RedisUtil;
+import com.waither.userservice.util.RedisUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

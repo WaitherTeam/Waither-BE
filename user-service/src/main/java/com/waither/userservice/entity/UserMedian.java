@@ -1,6 +1,5 @@
 package com.waither.userservice.entity;
 
-import com.waither.userservice.converter.SurveyConverter;
 import com.waither.userservice.entity.enums.Season;
 import com.waither.userservice.global.BaseEntity;
 import jakarta.persistence.*;
@@ -8,7 +7,7 @@ import lombok.*;
 
 import java.util.List;
 
-import static com.waither.userservice.global.util.CalculateUtil.calculateMedian;
+import static com.waither.userservice.util.CalculateUtil.calculateMedian;
 
 @Builder
 @Getter
