@@ -18,7 +18,6 @@ import com.waither.weatherservice.entity.ExpectedWeather;
 import com.waither.weatherservice.entity.Region;
 import com.waither.weatherservice.entity.WeatherAdvisory;
 import com.waither.weatherservice.exception.WeatherExceptionHandler;
-import com.waither.weatherservice.utills.GpsTransferUtils;
 import com.waither.weatherservice.kafka.KafkaMessage;
 import com.waither.weatherservice.kafka.Producer;
 import com.waither.weatherservice.openapi.ForeCastOpenApiResponse;
@@ -29,6 +28,7 @@ import com.waither.weatherservice.repository.ExpectedWeatherRepository;
 import com.waither.weatherservice.repository.RegionRepository;
 import com.waither.weatherservice.repository.WeatherAdvisoryRepository;
 import com.waither.weatherservice.response.WeatherErrorCode;
+import com.waither.weatherservice.utills.GpsTransferUtils;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -64,8 +64,8 @@ public class WeatherService {
 
 		ForeCastOpenApiResponse.Item item = items.get(0);
 
-		List<Region> region = regionRepository.findRegionByXAndY(item.getNx(), item.getNy());
-		String regionName = region.get(0).getRegionName();
+		String regionName = convertGridToRegionName(item.getNx(), item.getNy());
+
 		String key = regionName + "_" + item.getFcstDate() + "_" + item.getFcstTime();
 
 		ExpectedWeather expectedWeather = ExpectedWeather.builder()
@@ -105,8 +105,8 @@ public class WeatherService {
 
 		ForeCastOpenApiResponse.Item item = items.get(0);
 
-		List<Region> region = regionRepository.findRegionByXAndY(item.getNx(), item.getNy());
-		String regionName = region.get(0).getRegionName();
+		String regionName = convertGridToRegionName(item.getNx(), item.getNy());
+
 		String key = regionName + "_" + item.getFcstDate() + "_" + item.getFcstTime();
 
 		DailyWeather dailyWeather = DailyWeather.builder()
@@ -162,12 +162,7 @@ public class WeatherService {
 	public MainWeatherResponse getMainWeather(double latitude, double longitude) {
 		LocalDateTime now = LocalDateTime.now();
 
-		List<Region> region = regionRepository.findRegionByLatAndLong(latitude, longitude);
-
-		if (region.isEmpty())
-			throw new WeatherExceptionHandler(WeatherErrorCode.REGION_NOT_FOUND);
-
-		String regionName = region.get(0).getRegionName();
+		String regionName = convertGpsToRegionName(latitude, longitude);
 
 		log.info("[Main - api] region : {}", regionName);
 
@@ -208,7 +203,19 @@ public class WeatherService {
 	}
 
 	public String convertGpsToRegionName(double latitude, double longitude) {
-		return regionRepository.findRegionByLatAndLong(latitude, longitude).get(0).getRegionName();
+		List<Region> region = regionRepository.findRegionByLatAndLong(latitude, longitude);
+		if (region.isEmpty())
+			throw new WeatherExceptionHandler(WeatherErrorCode.REGION_NOT_FOUND);
+
+		return region.get(0).getRegionName();
+	}
+
+	public String convertGridToRegionName(int x, int y) {
+		List<Region> region = regionRepository.findRegionByXAndY(x, y);
+		if (region.isEmpty())
+			throw new WeatherExceptionHandler(WeatherErrorCode.REGION_NOT_FOUND);
+
+		return region.get(0).getRegionName();
 	}
 
 	public double calculateWindChill(double temp, double wind) {
@@ -219,12 +226,8 @@ public class WeatherService {
 	}
 
 	public double getWindChill(double latitude, double longitude, LocalDateTime baseTime) {
+		String regionName = convertGpsToRegionName(latitude, longitude);
 
-		List<Region> region = regionRepository.findRegionByLatAndLong(latitude, longitude);
-		if (region.isEmpty())
-			throw new WeatherExceptionHandler(WeatherErrorCode.REGION_NOT_FOUND);
-
-		String regionName = region.get(0).getRegionName();
 		LocalDateTime dailyWeatherBaseTime = convertLocalDateTimeToDailyWeatherTime(baseTime.minusHours(1));
 		String dailyWeatherKey = regionName + "_" + convertLocalDateTimeToString(dailyWeatherBaseTime);
 
