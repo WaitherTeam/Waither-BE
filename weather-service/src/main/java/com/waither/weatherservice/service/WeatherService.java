@@ -182,7 +182,6 @@ public class WeatherService {
 		DailyWeather dailyWeather = dailyWeatherRepository.findById(dailyWeatherKey)
 			.orElseGet(() -> {
 				try {
-					log.info("daily api");
 					String[] baseTime = convertLocalDateTimeToString(now.minusHours(2)).split("_");
 					createDailyWeather(region.getStartX(), region.getStartY(), baseTime[0], baseTime[1]);
 				} catch (URISyntaxException e) {
@@ -197,7 +196,6 @@ public class WeatherService {
 		ExpectedWeather expectedWeather = expectedWeatherRepository.findById(expectedWeatherKey)
 			.orElseGet(() -> {
 				try {
-					log.info("expect api");
 					String[] baseTime = convertLocalDateTimeToString(now.minusHours(1)).split("_");
 					createExpectedWeather(region.getStartX(), region.getStartY(), baseTime[0], baseTime[1]);
 				} catch (URISyntaxException e) {
